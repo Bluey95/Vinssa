@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :drugs
   devise_for :users, :controllers => {:registrations => "registrations"}
   get 'user/:id' => 'users#show'
   get 'users' => 'users#index'

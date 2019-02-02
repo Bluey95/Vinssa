@@ -1,5 +1,6 @@
 <% @users = User.all %>
 <div class="row ml-5">
+  <% if current_user.try(:admin) %>
     <% @users.each do |user| %>
         <div class="col-sm-4 mt-5">
         <div class="card shadow-lg" style="width: 350px">
@@ -12,4 +13,5 @@
         </div>
         </div>
     <% end %>
+  <% end %>
 </div>

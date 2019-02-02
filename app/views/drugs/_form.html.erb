@@ -1,0 +1,43 @@
+<%= bootstrap_form_with(model: drug, local: true) do |form| %>
+  <% if drug.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(drug.errors.count, "error") %> prohibited this drug from being saved:</h2>
+
+      <ul>
+      <% drug.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.number_field :quantity %>
+  </div>
+
+  <div class="field">
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.text_field :desc %>
+  </div>
+
+  <div class="field">
+    <%= form.date_select :expiration %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+    <% if params[:action] == 'new' %>
+      <%= link_to 'Cancel', drugs_path, class: "btn btn-danger float-right"%>
+    <% elsif params[:action] == 'edit' %>
+      <%= link_to 'Cancel', drugs_path, class: "btn btn-danger float-right" %>
+      <%= link_to 'Show', @drug, class: "btn btn-primary float-right  mr-3" %>
+    <% end %>
+  </div>
+<% end %>
