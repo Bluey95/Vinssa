@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_02_082952) do
+ActiveRecord::Schema.define(version: 2019_02_03_071954) do
 
   create_table "drugs", force: :cascade do |t|
     t.string "name"
@@ -20,6 +20,19 @@ ActiveRecord::Schema.define(version: 2019_02_02_082952) do
     t.date "expiration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number"
+  end
+
+  create_table "suppliers", id: false, force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.integer "phone"
+    t.string "location"
+    t.integer "drugs_id"
+    t.integer "id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["drugs_id"], name: "index_suppliers_on_drugs_id"
   end
 
   create_table "users", force: :cascade do |t|
