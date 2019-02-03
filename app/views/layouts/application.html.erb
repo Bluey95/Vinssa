@@ -11,6 +11,19 @@
 
   <body>
     <%= render 'layouts/navigation' %>
-    <%= yield %>
+    <div class="grid-container">
+      <div class="item2">
+        <div id="cart">
+          <% if @cart %>
+            <%= render @cart %>
+          <% end %>
+        </div>
+        <div class="mt-5">
+        <h6><i>Vinssa Pharmacy</i></h6>
+        <p>2019</p>
+        </div>
+      </div>
+      <div class="item3"><%= yield %></div>
+    </div>
   </body>
 </html>

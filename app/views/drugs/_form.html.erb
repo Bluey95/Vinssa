@@ -32,6 +32,11 @@
   </div>
 
   <div class="field">
+    <% options = options_from_collection_for_select(@users, :id, :username) %>
+    <%= form.select :supplier, options %>
+  </div>
+
+  <div class="field">
     <%= form.date_select :expiration %>
   </div>
 

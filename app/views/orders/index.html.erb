@@ -1,0 +1,57 @@
+<% if current_user.try(:supplier) %>
+  <div class="bg">
+  <div class="container">
+    <div class="row justify-content-center">
+      <p id="notice"><%= notice %></p>
+      <div class="card bg-light shadow-lg" style="width: auto; margin: 30px">
+        <div class="card-header text-white bg-info mb-3" >
+          <div style="display: inline-block; margin-top: 10px">
+            <h4>Orders</h4>
+          </div>
+          <% if current_user.try(:admin) %>
+            <span><%= link_to 'New Order', new_order_path, class: "btn btn-light float-right mt-2" %></span>
+          <% end %>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped table-bordered table-hover table-responsive">
+            <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Address</th>
+              <th scope="col">Pay type</th>
+              <th scope="col"></th>
+              <% if current_user.try(:admin) %>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              <% end %>
+            </tr>
+            </thead>
+            <tbody>
+            <% @orders.each do |order| %>
+              <% @id = order.id %>
+              <% @items = LineItem.where(:order_id => @id).to_a %>
+              <% @items.each do |item| %>
+                <% @drug_id = item.drug_id %>
+                <% @drug = Drug.find(@drug_id) %>
+             <% end %>
+                <% if current_user.username == User.find(@drug.supplier).username %>
+                  <tr>
+                    <td><%= order.id %></td>
+                    <td><%= order.address %></td>
+                    <td><%= Order.pay_types.key(order.pay_type) %></td>
+                    <td><%= link_to 'Show', order %></td>
+                    <% if current_user.try(:admin) %>
+                      <td><%= link_to 'Edit', edit_order_path(order) %></td>
+                      <td><%= link_to 'Destroy', order, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                    <% end %>
+                  </tr>
+              <% end %>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

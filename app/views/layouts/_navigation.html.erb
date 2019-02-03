@@ -11,7 +11,15 @@
       </li>
       <% if current_user.try(:admin) %>
         <li class="nav-item active">
-          <%= link_to "View users", users_path, class: 'nav-link' %>
+          <%= link_to "Users", users_path, class: 'nav-link' %>
+        </li>
+        <li class="nav-item active">
+          <%= link_to "Suppliers", users_suppliers_path, class: 'nav-link' %>
+        </li>
+      <% end %>
+      <% if current_user.try(:supplier) %>
+        <li class="nav-item active">
+          <%= link_to "Orders", orders_path, class: 'nav-link' %>
         </li>
       <% end %>
     </ul>
@@ -31,15 +39,11 @@
             <%= current_user.username%>
           </div>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <%= link_to 'Edit Profile', edit_user_registration_path, class: 'dropdown-item' %>
             <%= link_to 'Log out', destroy_user_session_path, :method => :get, class: 'dropdown-item' %>
           </div>
         </li>
         
       <% else %>
-        <li class="nav-item">
-          <%= link_to "Add an account", new_user_registration_path, class: 'nav-link' %>
-        </li>
         <li class="nav-item">
           <%= link_to "Log in", new_user_session_path, class: 'nav-link nav-item' %>
         </li>

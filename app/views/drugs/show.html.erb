@@ -1,34 +1,32 @@
-<p id="notice"><%= notice %></p>
+<div class="bg">
+  <div class="container">
+    <div class="row justify-content-left form-container">
+        <div class="col-sm-6 mt-5">
+          <div class="card shadow-lg mt-5" style="width: 100%">
+            <div class="card-body bg2">
+              <div class="">
+                <h5 class="card-title">Name: <%= @drug.name %></h5>
+                <p class="card-text"><%= @drug.desc %></p>
+                <p class="card-text">Number: <%= @drug.number%></p>
+                <p class="card-text">Price: Ksh <%= @drug.price %></p>
+                <p class="card-text">Quantity: <%= @drug.quantity %>g</p>
+                <p class="card-text">Expiry Date: <%= @drug.expiration %></p>
+                <% if current_user.try(:admin) %>
+                  <p class="card-text">Supplier: <%= @supplier.username %></p>
+                <% end %>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="float-right">
+                <% if current_user.try(:admin) %>
+                <%= link_to 'Edit', edit_drug_path(@drug) %>
+                <% end %>
+                <%= link_to 'Back', drugs_path %>
+              </div>
+            </div>
+          </div>
+        </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @drug.name %>
-</p>
-
-<p>
-  <strong>Number:</strong>
-  <%= @drug.number %>
-</p>
-
-<p>
-  <strong>Quantity:</strong>
-  <%= @drug.quantity %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @drug.price %>
-</p>
-
-<p>
-  <strong>Desc:</strong>
-  <%= @drug.desc %>
-</p>
-
-<p>
-  <strong>Expiration:</strong>
-  <%= @drug.expiration %>
-</p>
-
-<%= link_to 'Edit', edit_drug_path(@drug) %> |
-<%= link_to 'Back', drugs_path %>
+    </div>
+  </div>
+</div>

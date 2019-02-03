@@ -1,0 +1,36 @@
+<div class="bg">
+  <div class="container">
+  <p id="notice"><%= notice %></p>
+    <div class="row justify-content-left form-container">
+      <div class="col-sm-6 mt-5">
+          <% @id = @order.id %>
+          <% @items = LineItem.where(:order_id => @id) %>
+          <% @items.each do |item| %>
+            <% @drug_id = item.drug_id %>
+            <% @drug = Drug.find(@drug_id) %>
+            <% if current_user.username == User.find(@drug.supplier).username %>
+              <div class="card shadow-lg mt-5 mb-5" style="width: 100%">
+                <div class="card-body bg2">
+                  <div class="">
+                    <p class="card-text">Address: <%= @order.address %></p>
+                    <p class="card-text">Pay_type: <%= Order.pay_types.key(@order.pay_type) %></p>
+                    <p class="card-text">Drug: <%= @drug.name %></p>
+                    <p class="card-text">Quantity: <%= item.quantity %></p>
+                    <p class="card-text">Price: Ksh <%= @drug.price * item.quantity %></p>
+                    <p><%= link_to 'Send email', @order, method: :post %></p>
+                    <p><%= link_to 'Invoice', order_path(@order, format: 'pdf') %></p>
+                    <% if current_user.admin %>
+                      <p><%= link_to 'Edit', edit_order_path(@order) %> || <%= link_to 'Back', orders_path %></p>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

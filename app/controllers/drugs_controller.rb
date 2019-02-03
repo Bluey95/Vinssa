@@ -1,24 +1,32 @@
 class DrugsController < ApplicationController
+  include CurrentCart
+  before_action :set_cart
   before_action :set_drug, only: [:show, :edit, :update, :destroy]
 
   # GET /drugs
   # GET /drugs.json
   def index
     @drugs = Drug.all
+    @users = User.where(:supplier => true)
   end
 
   # GET /drugs/1
   # GET /drugs/1.json
   def show
+    @drug = Drug.find(params[:id])
+    @id = @drug.supplier
+    @supplier = User.find(@id)
   end
 
   # GET /drugs/new
   def new
     @drug = Drug.new
+    @users = User.where(:supplier => true)
   end
 
   # GET /drugs/1/edit
   def edit
+    @users = User.where(:supplier => true)
   end
 
   # POST /drugs
@@ -61,6 +69,7 @@ class DrugsController < ApplicationController
     end
   end
 
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_drug
@@ -69,6 +78,6 @@ class DrugsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def drug_params
-      params.require(:drug).permit(:name, :quantity, :price, :desc, :expiration, :number)
+      params.require(:drug).permit(:name, :quantity, :price, :desc, :expiration, :number, :supplier)
     end
 end

@@ -10,15 +10,16 @@ $(document).ready ->
   if (m < 10 && day < 10)
     strDate = d.getFullYear() + "-" + '0' + m + "-" + '0' + day;
   else
-    strDate = d.getFullYear() + "-" + m + "-" +  day;
+    strDate = d.getFullYear() + "-" + '0' + m + "-" +  day;
   $('.expiration').each(->
-    if ($(this).html()  == strDate)
+    if ($(this).html()  == strDate || $(this).html() < strDate)
       $(this).addClass('red')
   )
   $('.quantity').each( ->
     if ($(this).html() < 500)
       $(this).addClass('red')
   )
+
 
 
 

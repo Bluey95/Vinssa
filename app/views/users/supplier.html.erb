@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<div class="row ml-5">
+  <% if current_user.try(:admin) %>
+    <% @users.each do |user| %>
+        <div class="col-sm-4 mt-5">
+        <div class="card shadow-lg" style="width: 350px">
+        <%= image_tag(user.avatar.url, :alt => "avatar", :class => "card-img-top", :style => "height:300px") %>
+        <div class="card-body">
+            <h5 class="card-title"><%= user.username %></h5>
+            <p class="card-text"><%= user.email %></p>
+            <% if user.admin == true %>
+              <%= link_to "Remove Admin", update_admin_path(user), method: :put, data: { confirm: "This action will deny #{user.username} admin priviledges, are you sure?" }, class: "float-left" %>
+            <% else %>
+              <%= link_to "Make Admin", update_admin_path(user), method: :put, data: { confirm: "This action will give #{user.username} admin priviledges, are you sure?" }, class: "float-left" %>
+            <% end %>
+            <% if user.supplier == true %>
+              <%= link_to "Remove as a Supplier", update_supplier_path(user), method: :put, data: { confirm: "This action will deny #{user.username} supplier priviledges, are you sure?" } %>
+            <% else %>
+              <%= link_to "Add as supplier", update_supplier_path(user), method: :put, data: { confirm: "This action will give #{user.username} supplier priviledges, are you sure?" } %>
+            <% end %>
+            <%= link_to "Destroy", admin_destroy_user_path(user), method: :delete, data: { confirm: "You sure?" }, class: "float-right" %>
+        </div>
+        </div>
+        </div>
+    <% end %>
+  <% end %>
+</div>
+<div class="container mt-5">
+  <div style="display: block"></div>
+  <% if current_user.try(:admin) %>
+    <span><%= link_to 'New Supplier', new_user_registration_path, class: "btn btn-success float-right" %></span>
+  <% end %>
+</div>

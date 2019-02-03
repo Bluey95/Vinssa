@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hey Vinssa,</h1>
+    
+   
+    <p>
+      You have successfully made an order request,
+      your supply will be made to the following address, 
+      <%= @order.address %>, in less than a week from now once payment is made.  
+    </p>
+
+    <p>
+      You have ordered for the following drugs
+      <% @id = @order.id %>
+      <% @items = LineItem.where(:order_id => @id).to_a %>
+      <% @items.each do |item| %>
+        <% @drug_id = item.drug_id %>
+        <% @drug = Drug.find(@drug_id) %>
+        <ul>
+        <li>
+        <%= @drug.name %>
+        </li>
+        </ul>
+      <% end %>
+    </p>
+    <p>
+      Thank you.
+    </p>
+   
+  </body>
+</html>

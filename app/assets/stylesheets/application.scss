@@ -31,11 +31,12 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    overflow-y: scroll;
   }
 
 .bg2 {
   /* The image used */
-  background-image: url("bg2.png");
+  background-image: url("bg4.jpg");
 
   /* Full height */
   height: 100%;
@@ -44,6 +45,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  color: white;
 }
 
  .form-container{
@@ -122,4 +124,53 @@
 
 .red{
   color: #B00100;
+}
+
+.item2 { grid-area: menu; }
+.item3 { grid-area: main; }
+
+.grid-container {
+  display: grid;
+  grid-template-areas:
+          'menu main main main main main';
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+  height: 100%;
+  overflow: scroll;
+}
+
+.empty_cart_grid_container{
+  display: grid;
+  grid-template-areas:
+          'main main main main main main';
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+  height: 100%;
+  overflow: scroll;
+}
+
+.grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 20px 0;
+  font-size: 14px;
+}
+
+.total_line .total_cell {
+  font-weight: bold;
+  border-top: 1px solid #595;
+}
+
+#cart{
+  padding: 30px;
+  .item_price, .total_line {
+
+    text-align: right;
+  }
+  .total_line .total_cell {
+    font-weight: bold;
+    border-top: 1px solid #595;
+  }
 }
